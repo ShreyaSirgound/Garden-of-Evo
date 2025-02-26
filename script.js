@@ -2,8 +2,8 @@ const canvas = document.getElementById('myCanvas')
 const ctx = canvas.getContext('2d')
 
 let myFont = new FontFace(
-    "Pixelify Sans",
-    "url(https://fonts.gstatic.com/s/pixelifysans/v1/CHylV-3HFUT7aC4iv1TxGDR9Jn0Eiw.woff2)"
+    "Pangolin",
+    "url(https://fonts.gstatic.com/s/pangolin/v6/cY9GfjGcW0FPpi-tWMfN79z4i6BH.woff2)"
 );
 
 const collisionsMap = []
@@ -21,7 +21,7 @@ class Boundary {
     }
 
     draw() {
-        ctx.fillStyle = 'rgba(255,0,0,0.0)'
+        ctx.fillStyle = 'rgba(255,0,0,1.0)'
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 }
@@ -50,9 +50,12 @@ const playerBack = new Image()
 const playerLeft = new Image()
 const playerRight = new Image()
 const giftImg = new Image()
+const keyText = new Image()
+const keyImg = new Image()
+const winImg = new Image()
 
 function loadImages() {
-    var imgToLoad = 6, imgLoaded = 0;
+    var imgToLoad = 9, imgLoaded = 0;
 
     var onImgLoad = function()
     {
@@ -78,6 +81,15 @@ function loadImages() {
 
     giftImg.src = 'assets\\giftbox.png'
     giftImg.onload = onImgLoad;
+
+    keyText.src = 'assets\\key_text.png'
+    keyText.onload = onImgLoad;
+
+    keyImg.src = 'assets\\key1.png'
+    keyImg.onload = onImgLoad;
+
+    winImg.src = 'assets\\winText.png'
+    winImg.onload = onImgLoad;
 }
 
 class Sprite {
@@ -125,6 +137,7 @@ class GiftSprite {
         this.height = 45
         this.clipy = 0
         this.frames = 0
+        this.opened = false
     }
 
     draw() {
@@ -197,14 +210,46 @@ function animate() {
     boundaries.forEach(boundary => {
         boundary.draw()
     })
+    ctx.fillStyle = "#905920"
+    ctx.fillRect(0, 0, 310, 60)
+    ctx.fillStyle = "#D7C9AE"
+    ctx.fillRect(5, 5, 300, 50)
+    ctx.drawImage(keyText, 13, 13)
+    keysCollected = 0
+    keyCoor = 120
     gifts.forEach(gift => {
         gift.draw()
+        if(gift.opened){
+            ctx.drawImage(keyImg, keyCoor, 2)
+            keyCoor += 25
+            keysCollected++
+        }
     })
     player.draw()
 
+    if(keysCollected === 7){
+        ctx.fillStyle = "#905920"
+        ctx.fillRect(230, 130, 500, 280)
+        ctx.fillStyle = "#D7C9AE"
+        ctx.fillRect(235, 135, 490, 270)
+        ctx.drawImage(winImg, 275, 165)
+
+        canvas.addEventListener('click', (e) => {
+            const mouse = {
+              x: e.clientX - 155,
+              y: e.clientY - 25
+            }
+            console.log(mouse.x)
+            console.log(mouse.y)
+            if (mouse.x > 235 && mouse.x < 725 && mouse.y > 135 && mouse.y < 405){
+                window.location = "https://www.youtube.com/"
+            }
+        });
+    }
+
     let moving = true
     player.moving = false
-
+    giftPhrases = ["Click to open!", "You got a key!"]
     for (let i = 0; i < giftCoors.length; i++) {
         const gift = gifts[i]
         if (rectangularCollision({
@@ -219,10 +264,26 @@ function animate() {
             myFont.load().then((font) => {
                 document.fonts.add(font);
             
-                ctx.font = '15px Pixelify';
+                ctx.font = '15px Pangolin';
                 ctx.fillStyle = 'white';
-                ctx.fillText("Click to open!", gift.position.x - 30, gift.position.y);
+                ctx.fillText(giftPhrases[gift.frames], gift.position.x - 25, gift.position.y);
             });
+
+            if (gift.frames === 0){
+                canvas.addEventListener('click', (e) => {
+                    const mouse = {
+                      x: e.clientX - 160,
+                      y: e.clientY - 40
+                    }
+                    console.log(mouse.x)
+                    console.log(mouse.y)
+                    console.log(gift.position.y)
+                    if (mouse.x > gift.position.x && mouse.x < (gift.position.x + gift.width) && mouse.y > gift.position.y && mouse.y < (gift.position.y + gift.height)){
+                        gift.frames = 1
+                        gift.opened = true
+                    }
+                });
+            }
             break
         }
     }
