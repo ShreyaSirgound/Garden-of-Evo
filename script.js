@@ -21,7 +21,7 @@ class Boundary {
     }
 
     draw() {
-        ctx.fillStyle = 'rgba(255,0,0,1.0)'
+        ctx.fillStyle = 'rgba(255,0,0,0.0)'
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 }
@@ -85,7 +85,7 @@ function loadImages() {
     keyText.src = 'assets\\key_text.png'
     keyText.onload = onImgLoad;
 
-    keyImg.src = 'assets\\key1.png'
+    keyImg.src = 'assets\\key.png'
     keyImg.onload = onImgLoad;
 
     winImg.src = 'assets\\winText.png'
