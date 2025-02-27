@@ -307,7 +307,6 @@ function animate() {
                     if (mousePos.x > gift.position.x && mousePos.x < (gift.position.x + gift.width) && mousePos.y > gift.position.y && mousePos.y < (gift.position.y + gift.height)){
                         gift.frames = 1
                         giftOpenEff.play()
-                        giftOpenEff.sound.loop = false
                         gift.opened = true
                     }
                 }, false);
