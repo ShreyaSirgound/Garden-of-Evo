@@ -1,3 +1,11 @@
+function getMousePos(canvas, e) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+}
+
 const canvas = document.getElementById('myCanvas')
 const ctx = canvas.getContext('2d')
 
@@ -270,26 +278,13 @@ function animate() {
             });
 
             if (gift.frames === 0){
-                canvas.addEventListener('click', (e) => {
-                    const mouse = {
-                      x: e.clientX - ((window.screen.width - 960) / 2),
-                      y: e.clientY + ((window.screen.height - 540) / 2) - canvas.top
-                    }
-console.log("e y: " + e.clientY)
-                    console.log(mouse.x)
-                    console.log(mouse.y)
-                    
-console.log("g x start: " + gift.position.x)
-console.log("g y start: " + gift.position.y)
-console.log("g x end: " + (gift.position.x + gift.width))
-console.log("g y end: " + (gift.position.y + gift.height))
-console.log("w w: " + window.screen.width)
-console.log("w h:" + window.screen.height)
-                    if (mouse.x > gift.position.x && mouse.x < (gift.position.x + gift.width) && mouse.y > gift.position.y && mouse.y < (gift.position.y + gift.height)){
+                canvas.addEventListener('click', function(e) {
+                    var mousePos = getMousePos(canvas, e);
+                    if (mousePos.x > gift.position.x && mousePos.x < (gift.position.x + gift.width) && mousePos.y > gift.position.y && mousePos.y < (gift.position.y + gift.height)){
                         gift.frames = 1
                         gift.opened = true
                     }
-                });
+                }, false);
             }
             break
         }
