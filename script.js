@@ -254,7 +254,7 @@ function animate() {
     })
     player.draw()
 
-    if(keysCollected === 1){
+    if(keysCollected === 7){
         if(playWin){
             winEff.play()
             playWin = false
