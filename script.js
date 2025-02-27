@@ -278,6 +278,8 @@ function animate() {
                     console.log(mouse.x)
                     console.log(mouse.y)
                     console.log(gift.position.y)
+console.log("w w: " + window.screen.width)
+console.log("w h:" + window.screen.height)
                     if (mouse.x > gift.position.x && mouse.x < (gift.position.x + gift.width) && mouse.y > gift.position.y && mouse.y < (gift.position.y + gift.height)){
                         gift.frames = 1
                         gift.opened = true
