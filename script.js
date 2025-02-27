@@ -70,6 +70,7 @@ function loadImages() {
         imgLoaded++;
         if(imgLoaded == imgToLoad)
             animate();
+            gameTheme.play()
     };
 
     map.src = 'assets\\map.png';
@@ -192,6 +193,26 @@ const keys = {
     }
 }
 
+function sound(src, shouldLoop) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    if(shouldLoop){
+        while(true){
+            this.play = function(){
+                this.sound.play();
+            } 
+        }
+    } else {
+        this.play = function(){
+            this.sound.play();
+        } 
+    }
+}
+
 function rectangularCollision({rect1, rect2}) {
     return (
         rect1.position.x + rect1.width >= rect2.position.x &&
@@ -212,6 +233,9 @@ for(let i = 0; i < giftCoors.length; i++){
     gifts.push(giftbox)
 }
 
+var gameTheme = new sound("music\\theme.mp3")
+var giftOpenEff = new sound("music\\gift_open_effect.mp3")
+
 function animate() {
     window.requestAnimationFrame(animate)
     ctx.drawImage(map, 0, 0)
@@ -228,7 +252,7 @@ function animate() {
     gifts.forEach(gift => {
         gift.draw()
         if(gift.opened){
-            ctx.drawImage(keyImg, keyCoor, 2)
+            ctx.drawImage(keyImg, keyCoor, 5)
             keyCoor += 25
             keysCollected++
         }
@@ -282,6 +306,8 @@ function animate() {
                     var mousePos = getMousePos(canvas, e);
                     if (mousePos.x > gift.position.x && mousePos.x < (gift.position.x + gift.width) && mousePos.y > gift.position.y && mousePos.y < (gift.position.y + gift.height)){
                         gift.frames = 1
+                        giftOpenEff.play()
+                        giftOpenEff.sound.loop = false
                         gift.opened = true
                     }
                 }, false);
