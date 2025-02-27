@@ -277,7 +277,11 @@ function animate() {
                     }
                     console.log(mouse.x)
                     console.log(mouse.y)
-                    console.log(gift.position.y)
+                    
+console.log("g x start: " + gift.position.x)
+console.log("g y start: " + gift.position.y)
+console.log("g x end: " + (gift.position.x + gift.width))
+console.log("g y end: " + (gift.position.y + gift.height))
 console.log("w w: " + window.screen.width)
 console.log("w h:" + window.screen.height)
                     if (mouse.x > gift.position.x && mouse.x < (gift.position.x + gift.width) && mouse.y > gift.position.y && mouse.y < (gift.position.y + gift.height)){
