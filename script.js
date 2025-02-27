@@ -273,7 +273,7 @@ function animate() {
                 canvas.addEventListener('click', (e) => {
                     const mouse = {
                       x: e.clientX - ((window.screen.width - 960) / 2),
-                      y: e.clientY + ((window.screen.height - 540) / 2)
+                      y: e.clientY + ((window.screen.height - 540) / 2) - canvas.top
                     }
                     console.log(mouse.x)
                     console.log(mouse.y)
