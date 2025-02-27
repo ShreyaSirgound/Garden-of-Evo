@@ -16,6 +16,7 @@ let myFont = new FontFace(
 
 var gameTheme = new sound("music\\theme.mp3")
 var giftOpenEff = new sound("music\\gift_open_effect.mp3")
+var winEff = new sound("music\\winning_effect.mp3")
 
 const collisionsMap = []
 for (let i = 0; i < collisions.length; i += 80) {
@@ -73,7 +74,7 @@ function loadImages() {
         imgLoaded++;
         if(imgLoaded == imgToLoad)
             animate();
-            gameTheme.play()
+            giftOpenEff.play() 
     };
 
     map.src = 'assets\\map.png';
@@ -196,23 +197,15 @@ const keys = {
     }
 }
 
-function sound(src, shouldLoop) {
+function sound(src) {
     this.sound = document.createElement("audio");
     this.sound.src = src;
     this.sound.setAttribute("preload", "auto");
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
     document.body.appendChild(this.sound);
-    if(shouldLoop){
-        while(true){
-            this.play = function(){
-                this.sound.play();
-            } 
-        }
-    } else {
-        this.play = function(){
-            this.sound.play();
-        } 
+    this.play = function(){
+        this.sound.play();
     }
 }
 
@@ -235,6 +228,8 @@ for(let i = 0; i < giftCoors.length; i++){
     })
     gifts.push(giftbox)
 }
+
+var playWin = true
 
 function animate() {
     window.requestAnimationFrame(animate)
@@ -259,7 +254,11 @@ function animate() {
     })
     player.draw()
 
-    if(keysCollected === 7){
+    if(keysCollected === 1){
+        if(playWin){
+            winEff.play()
+            playWin = false
+        }
         ctx.fillStyle = "#905920"
         ctx.fillRect(230, 130, 500, 280)
         ctx.fillStyle = "#D7C9AE"
@@ -271,12 +270,11 @@ function animate() {
               x: e.clientX - 155,
               y: e.clientY - 25
             }
-            console.log(mouse.x)
-            console.log(mouse.y)
             if (mouse.x > 235 && mouse.x < 725 && mouse.y > 135 && mouse.y < 405){
                 window.location = "https://youtu.be/2gsMPL3dBfU?si=7yzdtfGAlLzaznxl"
             }
         });
+        return
     }
 
     let moving = true
