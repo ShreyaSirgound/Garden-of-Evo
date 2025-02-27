@@ -272,8 +272,8 @@ function animate() {
             if (gift.frames === 0){
                 canvas.addEventListener('click', (e) => {
                     const mouse = {
-                      x: e.clientX - 160,
-                      y: e.clientY - 40
+                      x: e.clientX - ((window.screen.width - 960) / 2),
+                      y: e.clientY - ((window.screen.height - 540) / 2)
                     }
                     console.log(mouse.x)
                     console.log(mouse.y)
