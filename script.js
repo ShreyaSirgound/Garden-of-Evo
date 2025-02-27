@@ -242,7 +242,7 @@ function animate() {
             console.log(mouse.x)
             console.log(mouse.y)
             if (mouse.x > 235 && mouse.x < 725 && mouse.y > 135 && mouse.y < 405){
-                window.location = "https://www.youtube.com/"
+                window.location = "https://youtu.be/2gsMPL3dBfU?si=7yzdtfGAlLzaznxl"
             }
         });
     }
