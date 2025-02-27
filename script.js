@@ -6,6 +6,18 @@ function getMousePos(canvas, e) {
     };
 }
 
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+}
+
 const canvas = document.getElementById('myCanvas')
 const ctx = canvas.getContext('2d')
 
@@ -72,9 +84,10 @@ function loadImages() {
     var onImgLoad = function()
     {
         imgLoaded++;
-        if(imgLoaded == imgToLoad)
+        if(imgLoaded == imgToLoad){
+            gameTheme.play() 
             animate();
-            giftOpenEff.play() 
+        }   
     };
 
     map.src = 'assets\\map.png';
@@ -194,18 +207,6 @@ const keys = {
     },
     ArrowRight: {
         pressed: false
-    }
-}
-
-function sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function(){
-        this.sound.play();
     }
 }
 
