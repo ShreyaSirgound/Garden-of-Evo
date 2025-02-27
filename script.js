@@ -14,6 +14,9 @@ let myFont = new FontFace(
     "url(https://fonts.gstatic.com/s/pangolin/v6/cY9GfjGcW0FPpi-tWMfN79z4i6BH.woff2)"
 );
 
+var gameTheme = new sound("music\\theme.mp3")
+var giftOpenEff = new sound("music\\gift_open_effect.mp3")
+
 const collisionsMap = []
 for (let i = 0; i < collisions.length; i += 80) {
     collisionsMap.push(collisions.slice(i, 80 + i))
@@ -232,9 +235,6 @@ for(let i = 0; i < giftCoors.length; i++){
     })
     gifts.push(giftbox)
 }
-
-var gameTheme = new sound("music\\theme.mp3")
-var giftOpenEff = new sound("music\\gift_open_effect.mp3")
 
 function animate() {
     window.requestAnimationFrame(animate)
