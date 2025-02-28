@@ -69,6 +69,7 @@ collisionsMap.forEach((row, i) => {
     })
 })
 
+const startImg = new Image()
 const map = new Image()
 const playerFront = new Image()
 const playerBack = new Image()
@@ -80,7 +81,7 @@ const keyImg = new Image()
 const winImg = new Image()
 
 function loadImages() {
-    var imgToLoad = 9, imgLoaded = 0;
+    var imgToLoad = 10, imgLoaded = 0;
 
     var onImgLoad = function()
     {
@@ -117,6 +118,9 @@ function loadImages() {
 
     winImg.src = 'assets\\winText.png'
     winImg.onload = onImgLoad;
+
+    startImg.src = 'assets\\startText.png'
+    startImg.onload = onImgLoad;
 }
 
 class Sprite {
@@ -237,7 +241,22 @@ function animate() {
     window.requestAnimationFrame(animate)
     console.log(firstAnimate)
     if (firstAnimate){
-        gameTheme.play()
+        ctx.fillStyle = "#905920"
+        ctx.fillRect(230, 130, 500, 280)
+        ctx.fillStyle = "#D7C9AE"
+        ctx.fillRect(235, 135, 490, 270)
+        ctx.drawImage(startImg, 275, 165)
+
+        canvas.addEventListener('click', (e) => {
+            const mouse = {
+              x: e.clientX - 155,
+              y: e.clientY - 25
+            }
+            if (mouse.x > 235 && mouse.x < 725 && mouse.y > 135 && mouse.y < 405){
+                gameTheme.play()
+                firstAnimate = false
+            }
+        });
     }
     ctx.drawImage(map, 0, 0)
     boundaries.forEach(boundary => {
