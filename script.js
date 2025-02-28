@@ -84,9 +84,9 @@ function loadImages() {
     var onImgLoad = function()
     {
         imgLoaded++;
-        if(imgLoaded == imgToLoad){
-            gameTheme.play() 
+        if(imgLoaded == imgToLoad){ 
             animate();
+            gameTheme.play()
         }   
     };
 
