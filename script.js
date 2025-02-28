@@ -234,11 +234,11 @@ for(let i = 0; i < giftCoors.length; i++){
 var playWin = true
 
 function animate() {
+    window.requestAnimationFrame(animate)
     console.log(firstAnimate)
     if (firstAnimate){
         gameTheme.play()
     }
-    window.requestAnimationFrame(animate)
     ctx.drawImage(map, 0, 0)
     boundaries.forEach(boundary => {
         boundary.draw()
