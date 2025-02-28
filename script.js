@@ -234,6 +234,7 @@ for(let i = 0; i < giftCoors.length; i++){
 var playWin = true
 
 function animate() {
+    console.log(firstAnimate)
     if (firstAnimate){
         gameTheme.play()
     }
