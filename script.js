@@ -26,7 +26,6 @@ let myFont = new FontFace(
     "url(https://fonts.gstatic.com/s/pangolin/v6/cY9GfjGcW0FPpi-tWMfN79z4i6BH.woff2)"
 );
 
-var firstAnimate = true
 var gameTheme = new sound("music\\theme.mp3")
 var giftOpenEff = new sound("music\\gift_open_effect.mp3")
 var winEff = new sound("music\\winning_effect.mp3")
@@ -87,8 +86,24 @@ function loadImages() {
     {
         imgLoaded++;
         if(imgLoaded == imgToLoad){ 
-            animate();
-            firstAnimate = false
+            window.requestAnimationFrame(animate)
+            console.log(firstAnimate)
+            ctx.fillStyle = "#905920"
+            ctx.fillRect(230, 130, 500, 280)
+            ctx.fillStyle = "#D7C9AE"
+            ctx.fillRect(235, 135, 490, 270)
+            ctx.drawImage(startImg, 275, 165)
+        
+            canvas.addEventListener('click', (e) => {
+                const mouse = {
+                  x: e.clientX - 155,
+                  y: e.clientY - 25
+                }
+                if (mouse.x > 235 && mouse.x < 725 && mouse.y > 135 && mouse.y < 405){
+                    gameTheme.play()
+                    animate();
+                }
+            });
         }   
     };
 
@@ -239,25 +254,6 @@ var playWin = true
 
 function animate() {
     window.requestAnimationFrame(animate)
-    console.log(firstAnimate)
-    if (firstAnimate){
-        ctx.fillStyle = "#905920"
-        ctx.fillRect(230, 130, 500, 280)
-        ctx.fillStyle = "#D7C9AE"
-        ctx.fillRect(235, 135, 490, 270)
-        ctx.drawImage(startImg, 275, 165)
-
-        canvas.addEventListener('click', (e) => {
-            const mouse = {
-              x: e.clientX - 155,
-              y: e.clientY - 25
-            }
-            if (mouse.x > 235 && mouse.x < 725 && mouse.y > 135 && mouse.y < 405){
-                gameTheme.play()
-                firstAnimate = false
-            }
-        });
-    }
     ctx.drawImage(map, 0, 0)
     boundaries.forEach(boundary => {
         boundary.draw()
