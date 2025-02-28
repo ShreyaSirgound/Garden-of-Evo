@@ -86,6 +86,7 @@ function loadImages() {
     {
         imgLoaded++;
         if(imgLoaded == imgToLoad){ 
+            ctx.drawImage(map, 0, 0)
             ctx.fillStyle = "#905920"
             ctx.fillRect(230, 130, 500, 280)
             ctx.fillStyle = "#D7C9AE"
