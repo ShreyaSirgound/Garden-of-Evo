@@ -86,8 +86,6 @@ function loadImages() {
     {
         imgLoaded++;
         if(imgLoaded == imgToLoad){ 
-            window.requestAnimationFrame(animate)
-            console.log(firstAnimate)
             ctx.fillStyle = "#905920"
             ctx.fillRect(230, 130, 500, 280)
             ctx.fillStyle = "#D7C9AE"
