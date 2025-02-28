@@ -284,16 +284,6 @@ function animate() {
         ctx.fillStyle = "#D7C9AE"
         ctx.fillRect(235, 135, 490, 270)
         ctx.drawImage(winImg, 275, 165)
-
-        canvas.addEventListener('click', (e) => {
-            const mouse = {
-              x: e.clientX - 155,
-              y: e.clientY - 25
-            }
-            if (mouse.x > 235 && mouse.x < 725 && mouse.y > 135 && mouse.y < 405){
-                window.location = "https://youtu.be/2gsMPL3dBfU?si=7yzdtfGAlLzaznxl"
-            }
-        });
         return
     }
 
