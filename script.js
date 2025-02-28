@@ -26,6 +26,7 @@ let myFont = new FontFace(
     "url(https://fonts.gstatic.com/s/pangolin/v6/cY9GfjGcW0FPpi-tWMfN79z4i6BH.woff2)"
 );
 
+var firstAnimate = true
 var gameTheme = new sound("music\\theme.mp3")
 var giftOpenEff = new sound("music\\gift_open_effect.mp3")
 var winEff = new sound("music\\winning_effect.mp3")
@@ -86,7 +87,7 @@ function loadImages() {
         imgLoaded++;
         if(imgLoaded == imgToLoad){ 
             animate();
-            gameTheme.play()
+            firstAnimate = false
         }   
     };
 
@@ -233,6 +234,9 @@ for(let i = 0; i < giftCoors.length; i++){
 var playWin = true
 
 function animate() {
+    if (firstAnimate){
+        gameTheme.play()
+    }
     window.requestAnimationFrame(animate)
     ctx.drawImage(map, 0, 0)
     boundaries.forEach(boundary => {
