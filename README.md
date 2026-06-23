@@ -5,7 +5,7 @@ A single-player, browser-based adventure game built in vanilla JavaScript. Built
 
 **[→ Play it here](https://shreyasirgound.github.io/Garden-of-Evo/)**
 
-![Garden of Evo screenshot](./assets/game-page.png)
+![Garden of Evo screenshot](./assets/game_page.png)
 
 ---
 
