@@ -5,18 +5,15 @@ A single-player, browser-based adventure game built in vanilla JavaScript. Built
 
 **[→ Play it here](https://shreyasirgound.github.io/Garden-of-Evo/)**
 
-![Garden of Evo screenshot](./assets/game_page.png)
-
----
+<div align="center">
+  <img src="/assets/game_page.png" width="700" alt="Garden of Evo"/>
+</div>
 
 ## about
-Garden of Evo is a short browser adventure game where the player 
-explores an evolving garden world. Built in one week as a creative 
+Garden of Evo is a browser adventure game where the player 
+explores an garden world to open gifts using arrow keys. Built in one week as a creative 
 JavaScript exercise focused on game state management, collision 
 detection, and dynamic rendering without any external libraries.
-
-## how to play
-- Use arrow keys
 
 ## tech
 Built with vanilla `JavaScript`, `HTML5 Canvas`, and `CSS` — no frameworks or game engines.
